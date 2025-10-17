@@ -6,7 +6,19 @@ exports.obtenerJuegos = async (req, res) => {
 
   try {
     const [juegos] = await db.query(sql);
-    res.status(200).json(juegos);
+
+    const juegosParseados = juegos.map((juego) => {
+      const fecha = new Date(juego.fecha_adquirido);
+      const dia = fecha.getDate().toString().padStart(2, "0");
+      const mes = (fecha.getMonth() + 1).toString().padStart(2, "0");
+      const anio = fecha.getFullYear();
+      return {
+        ...juego,
+        fecha_adquirido: `${dia}-${mes}-${anio}`,
+      };
+    });
+
+    res.status(200).json(juegosParseados);
   } catch (e) {
     console.error(e);
     res.status(500).json({ message: "Error Interno en el Servidor" });
@@ -26,7 +38,18 @@ exports.obtenerJuegosById = async (req, res) => {
       return res.status(404).json({ message: "No encontramos el juego" });
     }
 
-    res.status(200).json(juego[0]);
+    const juegoParseado = () => {
+      const fecha = new Date(juego[0].fecha_adquirido);
+      const dia = fecha.getDate().toString().padStart(2, "0");
+      const mes = (fecha.getMonth() + 1).toString().padStart(2, "0");
+      const anio = fecha.getFullYear();
+      return {
+        ...juego[0],
+        fecha_adquirido: `${dia}-${mes}-${anio}`,
+      };
+    };
+
+    res.status(200).json(juegoParseado());
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error Interno en el Servidor" });
