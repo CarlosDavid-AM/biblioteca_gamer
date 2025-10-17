@@ -56,6 +56,33 @@ exports.obtenerJuegosById = async (req, res) => {
   }
 };
 
+exports.crearJuego = async (req, res) => {
+  const { nombre, plataforma, url_imagen, fecha_adquirido } = req.body;
+
+  if (!nombre || !plataforma || !url_imagen || !fecha_adquirido) {
+    return res.status(400).json({ message: "Faltan datos obligatorios" });
+  }
+
+  const sql =
+    "INSERT INTO juegos (nombre, plataforma, url_imagen, fecha_adquirido) VALUES (?, ?, ?, ?)";
+
+  try {
+    const [result] = await db.query(sql, [
+      nombre,
+      plataforma,
+      url_imagen,
+      fecha_adquirido,
+    ]);
+
+    res
+      .status(201)
+      .json({ message: "Juego creado correctamente", id: result.insertId });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error Interno en el Servidor" });
+  }
+};
+
 exports.eliminarJuego = async (req, res) => {
   const { id } = req.params;
 
