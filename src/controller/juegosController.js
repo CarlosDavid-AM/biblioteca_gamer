@@ -83,6 +83,37 @@ exports.crearJuego = async (req, res) => {
   }
 };
 
+exports.actualizarJuego = async (req, res) => {
+  const { id } = req.params;
+  const { nombre, plataforma, url_imagen, fecha_adquirido } = req.body;
+
+  if (!nombre || !plataforma || !url_imagen || !fecha_adquirido) {
+    return res.status(400).json({ message: "Faltan datos obligatorios" });
+  }
+
+  const sql =
+    "UPDATE juegos SET nombre = ?, plataforma = ?, url_imagen = ?, fecha_adquirido = ? WHERE id = ?";
+
+  try {
+    const [result] = await db.query(sql, [
+      nombre,
+      plataforma,
+      url_imagen,
+      fecha_adquirido,
+      id,
+    ]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "No encontramos el juego" });
+    }
+
+    res.status(200).json({ message: "Juego actualizado correctamente" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error Interno en el Servidor" });
+  }
+};
+
 exports.eliminarJuego = async (req, res) => {
   const { id } = req.params;
 
