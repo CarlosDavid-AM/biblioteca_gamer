@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "79c551c7-0f29-4ff7-9244-76488e1f85d2",
+		"name": "biblioteca_gamer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27080892",
+		"_collection_link": "https://blue-shadow-599771.postman.co/workspace/Team-Workspace~32c19fa3-ed6c-4c7c-8d2b-99a4c8fb38b3/collection/27080892-79c551c7-0f29-4ff7-9244-76488e1f85d2?action=share&source=collection_link&creator=27080892"
+	},
+	"item": [
+		{
+			"name": "Get All Games",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}juegos",
+					"host": [
+						"{{base_url}}juegos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Games by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}juegos/1",
+					"host": [
+						"{{base_url}}juegos"
+					],
+					"path": [
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Games by Id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}juegos/1",
+					"host": [
+						"{{base_url}}juegos"
+					],
+					"path": [
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Game",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"\",\r\n    \"plataforma\": \"\",\r\n    \"url_imagen\": \"\",\r\n    \"fecha_adquirido\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}juegos",
+					"host": [
+						"{{base_url}}juegos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Grand Theft Auto V\",\r\n    \"plataforma\": \"Steam\",\r\n    \"url_imagen\": \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKG6dY_AxIcpxSjUdYHtt3b-ef3BZfg53oNQ&s\",\r\n    \"fecha_adquirido\": \"30-11-1899\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}juegos/1",
+					"host": [
+						"{{base_url}}juegos"
+					],
+					"path": [
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000/api/"
+		}
+	]
+}
